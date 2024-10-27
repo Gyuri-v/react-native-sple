@@ -10,7 +10,9 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Fontisto } from "@expo/vector-icons";
-import { styles } from "./style";
+
+import { styles } from "./_style";
+import PageTitle from "../components/PageTitle";
 
 const STORAGE_KEY = "@toDos";
 
@@ -26,8 +28,6 @@ export function TasksScreen() {
   }, []);
 
   /* category */
-  const travel = () => setWorking(false);
-  const work = () => setWorking(true);
   const onChangeText = (payload) => setText(payload);
 
   /* func */
@@ -68,29 +68,67 @@ export function TasksScreen() {
 
   return (
     <View style={styles.container}>
-      {/* todo */}
-      <TextInput
-        onSubmitEditing={addToDo}
-        onChangeText={onChangeText}
-        returnKeyType="done"
-        value={text}
-        placeholder={
-          working ? "What do you have to do?" : "Where do you want to go?"
-        }
-        style={styles.input}
-      />
+
+      {/* contents */}
       <ScrollView>
-        {Object.keys(toDos).map((key) =>
-          toDos[key].working === working ? (
-            <View style={styles.toDo} key={key}>
-              <Text style={styles.toDoText}>{toDos[key].text}</Text>
-              <TouchableOpacity onPress={() => deleteToDo(key)}>
-                <Fontisto name="trash" size={18} color={'gray'} />
-              </TouchableOpacity>
-            </View>
-          ) : null
-        )}
+        <PageTitle icon="📝" title="Tasks" />
+
+        {/* todo */}
+        <TextInput
+          onSubmitEditing={addToDo}
+          onChangeText={onChangeText}
+          returnKeyType="done"
+          value={text}
+          placeholder={
+            working ? "What do you have to do?" : "Where do you want to go?"
+          }
+          style={taskStyles.input}
+        />
+        <View>
+          {Object.keys(toDos).map((key) =>
+            toDos[key].working === working ? (
+              <View style={taskStyles.toDo} key={key}>
+                <Text style={taskStyles.toDoText}>{toDos[key].text}</Text>
+                <TouchableOpacity onPress={() => deleteToDo(key)}>
+                  <Fontisto name="trash" size={18} color={'gray'} />
+                </TouchableOpacity>
+              </View>
+            ) : null
+          )}
+        </View>
       </ScrollView>
     </View>
   );
 }
+
+export const taskStyles = StyleSheet.create({
+  /* todo */
+  btnText: {
+    fontSize: 38,
+    fontWeight: "600",
+  },
+  input: {
+    backgroundColor: "white",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    marginVertical: 20,
+    fontSize: 18,
+    borderWidth: 1,
+  },
+  toDo: {
+    backgroundColor: '#222',
+    marginBottom: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    borderRadius: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  toDoText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
