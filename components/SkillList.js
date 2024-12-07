@@ -13,7 +13,7 @@ const SkillList = ({ title, data }) => {
         <TouchableOpacity
           key={item.name}
           style={styles.item}
-          onPress={() => navigation.navigate(item.name)}
+          onPress={() => navigation.navigate('SubjectDetail', { subject: item })}
         >
           <View style={styles.icon}>
             {/* <Text style={styles.icon.text}>{item.icon}</Text> */}

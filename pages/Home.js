@@ -13,10 +13,16 @@ import TaskList from '../components/TaskList';
 import List from '../components/List';
 import PageTitle from '../components/PageTitle';
 import SkillList from '../components/SkillList';
+import { useClassContext } from '../context/ClassContext';
+import { useSubjectContext } from '../context/SubjectContext';
+import { useStudyContext } from '../context/StudyContext';
 
 
 
 export function HomeScreen() {
+  const { classes } = useClassContext();
+  const { subjects } = useSubjectContext();
+  const { studyItems } = useStudyContext();
   
   // 샘플 데이터
   const tasks = [
@@ -45,13 +51,6 @@ export function HomeScreen() {
       completionDate: '',
     },
   ];
-  const skills = [
-    { name: 'React', router: 'Datail', image: require('../assets/skill-react.png')  },
-    { name: 'TypeScript', router: 'Datail', image: require('../assets/skill-typeScript.png')  },
-    { name: 'CSS', router: 'StudyDatailScreen', image: require('../assets/skill-css.png')  },
-    { name: 'Javascript', router: 'Datail', image: require('../assets/skill-js.png')  },
-    { name: 'Next.js', router: 'Datail', image: require('../assets/skill-next.png')  },
-  ];
 
 
   const recentData = [
@@ -78,36 +77,6 @@ export function HomeScreen() {
     },
   ];
 
-  const classData = [
-    {
-      id: '1',
-      title: '노마드코더) React Basics',
-      skills: ['react', 'javascript'],
-      progress: 100,
-      isCompleted: true,
-      icon: 'R',
-      // image: require('./assets/skill-react.png')
-    },
-    {
-      id: '2',
-      title: '인프런) CSS 마스터',
-      skills: ['css', 'next'],
-      icon: 'C',
-      progress: 75,
-      isCompleted: false,
-      // image: require('./assets/skill-css.png')
-    },
-    {
-      id: '3',
-      title: '노마드코더) TypeScript',
-      skills: ['typescript'],
-      icon: 'T',
-      progress: 30,
-      isCompleted: false,
-      // image: require('./assets/skill-typescript.png')
-    },
-  ];
-
 
   return (
     <View style={styles.container}>
@@ -127,15 +96,15 @@ export function HomeScreen() {
           </View>
           <View style={styles.box}>
             <Text style={styles.subTitle}>나의 스킬트리</Text>
-            <SkillList title="Subjects" data={skills} />
+            <SkillList title="Subjects" data={subjects} />
           </View>
           <View style={styles.box}>
             <Text style={styles.subTitle}>최근 Class</Text>
-            <TaskList title="진행중인 과제" tasks={classData} />
+            <TaskList title="진행중인 과제" tasks={classes} />
           </View>
           <View style={styles.box}>
             <Text style={styles.subTitle}>최근 Study</Text>
-            <List data={recentData} />
+            <List data={studyItems} />
           </View>
         </View>
       </ScrollView>

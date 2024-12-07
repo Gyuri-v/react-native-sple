@@ -1,13 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const PageTitle = ({ icon, title }) => {
+  const navigation = useNavigation();
+
+  const goToWritePage = () => {
+    if ( title === 'Subject' ) {
+      navigation.navigate('WriteSubject');
+    } else if ( title === 'Study' ) {
+      navigation.navigate('WriteStudy');
+    } else if ( title === 'Class' ) {
+      navigation.navigate('WriteClass');
+    }
+  };
+
   return (
     <View style={styles.heading}>
       <View style={styles.icon}>
         <Text style={styles.icon.text}>{icon}</Text>
       </View>
       <Text style={styles.title}>{title}</Text>
+
+      {
+        (title === 'Subject' || title === 'Study' || title === 'Class') &&  (
+          <TouchableOpacity onPress={goToWritePage} style={styles.button}>
+            <Text style={styles.button.text}>+</Text>
+          </TouchableOpacity>
+        )
+      }
     </View>
   );
 };
@@ -34,6 +55,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    marginLeft: 'auto',
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 50,
+    text: {
+      color: '#fff',
+      fontSize: 24,
+      lineHeight: 23,
+    },
   },
 });
 

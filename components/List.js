@@ -9,7 +9,8 @@ const List = ({ data }) => {
   const navigation = useNavigation();
 
   const navigateToDetail = (item) => {
-    navigation.navigate('Detail', { item });
+    // navigation.navigate('Detail', { item });
+    navigation.navigate('StudyDetail', { item });
   };
   
   const renderItem = ({ item }) => (
@@ -22,7 +23,8 @@ const List = ({ data }) => {
         <Text style={styles.title}>{item.title}</Text>
         <View style={styles.skillsContainer}>
           {item.skills.map((skill, index) => (
-            <Text>{skill} </Text>
+            <Text key={index} style={styles.skillText}>{skill} </Text>
+            // <Text key={index}>{skill} </Text>
           ))}
         </View>
       </View>

@@ -12,14 +12,18 @@
     "@expo/vector-icons": "^14.0.2",
     "@fortawesome/react-native-fontawesome": "^0.3.2",
     "@react-native-async-storage/async-storage": "1.23.1",
+    "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-community/slider": "^4.5.5",
     "@react-native/metro-config": "^0.76.3",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native-stack": "^6.11.0",
     "@react-navigation/stack": "^6.4.1",
     "expo": "^52.0.0",
+    "expo-image-picker": "~16.0.3",
     "expo-status-bar": "~2.0.0",
     "react": "18.3.1",
     "react-native": "0.76.3",
+    "react-native-calendars": "^1.1307.0",
     "react-native-svg": "15.8.0"
   },
   "devDependencies": {

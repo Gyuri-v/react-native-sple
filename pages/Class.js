@@ -3,39 +3,21 @@ import React, { useEffect, useState } from "react";
 import {
   ScrollView,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 
 import { styles } from "./_style";
 import List from '../components/List';
 import PageTitle from '../components/PageTitle';
-
-const data = [
-  {
-    id: '1',
-    title: '노마드코더) React Basics',
-    skills: ['react', 'javascript'],
-    icon: 'R',
-    // image: require('./assets/skill-react.png')
-  },
-  {
-    id: '2',
-    title: '인프런) CSS 마스터',
-    skills: ['css', 'next'],
-    icon: 'C',
-    // image: require('./assets/skill-css.png')
-  },
-  {
-    id: '3',
-    title: '노마드코더) TypeScript',
-    skills: ['typescript'],
-    icon: 'T',
-    // image: require('./assets/skill-typescript.png')
-  },
-];
+import { useNavigation } from '@react-navigation/native';
+import { useClassContext } from '../context/ClassContext';
 
 /* 강의리스트 */
 export function ClassScreen() {
+  const { classes } = useClassContext();
+  const navigation = useNavigation();
+  
   return (
     <View style={styles.container}>
 
@@ -43,7 +25,7 @@ export function ClassScreen() {
       <ScrollView>
         <PageTitle icon="👩🏻‍🏫" title="Class" />
         <View style={styles.contents}>
-          <List data={data} />
+          <List data={classes} />
         </View>
       </ScrollView>
     </View>
